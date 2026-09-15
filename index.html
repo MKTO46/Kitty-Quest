@@ -164,6 +164,8 @@
   const escape=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   function render(){document.querySelector('#today').innerHTML=today();document.querySelector('#quests').innerHTML=quests();document.querySelector('#workouts').innerHTML=workouts();document.querySelector('#athletics').innerHTML=athletics();document.querySelector('#power').innerHTML=power();document.querySelector('#rewards').innerHTML=rewards()}
   /* UI system: one progress component keeps visual feedback consistent everywhere. */
+  const activeQuests=active, doneSet=completed;
+  const levelFromXP=()=>Math.floor(state.profile.xp/500)+1;
   const ProgressBar=(current,target,label='',variant='standard')=>{const pct=Math.max(0,Math.min(100,target?current/target*100:0));return `<div class="progress-wrap"><div class="progress-meta"><span>${label}</span><span>${Math.round(pct)}%</span></div><div class="bar ${variant}"><i style="width:${pct}%"></i></div><div class="progress-meta"><span>${current.toLocaleString()} / ${target.toLocaleString()}</span><span></span></div></div>`};
   const sportIcon=s=>({"Flag Football":"🏈",Rugby:"🏉",Soccer:"⚽",Basketball:"🏀",Tennis:"🎾","Track & Field":"🏃",Rowing:"🚣",Swimming:"🏊",Calisthenics:"◌",Climbing:"♧"}[s]||'✦');
   const toast=(message)=>{const t=document.querySelector('#toast');t.textContent=message;t.classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.classList.remove('show'),1500)};
