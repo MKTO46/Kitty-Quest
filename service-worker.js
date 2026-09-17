@@ -1,5 +1,5 @@
-const CACHE='kitty-quest-2-v3';
-const FILES=['./','./index.html','./styles.css','./app.js?v=3','./data.js','./domain.mjs','./manifest.webmanifest','./app-icon.png','./galaxy-background.png'];
+const CACHE='kitty-quest-2-v4';
+const FILES=['./','./index.html','./styles.css','./boot-v1.js','./data.js','./domain.mjs','./manifest.webmanifest','./app-icon.png','./galaxy-background.png'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',event=>{
